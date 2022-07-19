@@ -1,6 +1,8 @@
 package codingProblems;
 
 public class ListNode {
+
+    // TODO: finish the ListNode class
     int val;
     ListNode next;
 

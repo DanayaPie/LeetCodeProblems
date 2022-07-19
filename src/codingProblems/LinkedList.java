@@ -1,6 +1,8 @@
 package codingProblems;
 
 public class LinkedList {
+
+    // TODO: finish the LinkedList class
     ListNode head;
 
     public void append(int val) {
