@@ -1,4 +1,4 @@
-package codingProblems;
+package codingProblems.Java;
 
 public class PalindromeNumber {
 

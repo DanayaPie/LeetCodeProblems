@@ -1,4 +1,4 @@
-package codingProblems;
+package codingProblems.Java;
 
 import java.util.Arrays;
 
