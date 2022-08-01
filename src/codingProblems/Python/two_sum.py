@@ -8,7 +8,7 @@ class Solution(object):
         self.nums = nums
         self.target = target
 
-    def twoSum(self, nums, target):
+    def two_sum(self, nums, target):
 
         arr = {}
 
@@ -26,4 +26,4 @@ class Solution(object):
 
 res = Solution(nums, target)
 
-print(res.twoSum(nums, target))
+print(res.two_sum(nums, target))
