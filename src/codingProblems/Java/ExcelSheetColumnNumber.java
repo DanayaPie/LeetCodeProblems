@@ -9,7 +9,7 @@ public class ExcelSheetColumnNumber {
             - calculation: (i * 26) + characterValue
      */
     public static void main(String[] args) {
-        String columnTitle = "DANAYA";
+        String columnTitle = "Pie";
 
         System.out.println(titleToNumber(columnTitle));
     }
