@@ -4,7 +4,7 @@ public class MoveZeroes {
 
     /*-
         Logic:
-            - Two pointers
+            - Two pointers: Look for none zero nums
      */
     public static void main(String[] args) {
 
