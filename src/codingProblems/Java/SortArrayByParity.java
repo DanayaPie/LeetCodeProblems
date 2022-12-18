@@ -2,8 +2,9 @@ package codingProblems.Java;
 
 public class SortArrayByParity {
     /*-
-        Logic:
-            - Two pointers: look for even nums
+        Ways:
+            1. Two pointers: look for even nums
+            2. Two pointers: compare left and right ends
      */
 
     static public void main(String[] args) {
@@ -16,6 +17,7 @@ public class SortArrayByParity {
         }
     }
 
+    // 1. Look for even nums
     private static int[] sortArrayByParity(int[] nums) {
 
         int lastOddPos = 0;
@@ -28,5 +30,25 @@ public class SortArrayByParity {
             }
         }
         return nums;
+    }
+
+    // 2. compare left and right ends
+//    private static int[] sortArrayByParity(int[] nums) {
+//
+//        int right = nums.length - 1;
+//        for (int left = 0; left < nums.length; left++) {
+//            if (left < right) {
+//                if (nums[left] % 2 != 0 && nums[right] % 2 == 0) {
+//                    int temp = nums[left];
+//                    nums[left] = nums[right];
+//                    nums[right] = temp;
+//                } else if (nums[left] % 2 == 0) {
+//                    left++;
+//                } else if (nums[right] % 2 != 0) {
+//                    right++;
+//                }
+//            }
+//        }
+//        return nums;
     }
 }
