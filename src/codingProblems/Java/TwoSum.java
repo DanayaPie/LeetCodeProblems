@@ -2,50 +2,61 @@ package codingProblems.Java;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Map;
 
 public class TwoSum {
 
     public static void main(String[] args) {
 
-        int[] nums = {2, 11, 15, 3};
+        int[] nums = {5, 6, 1, 4};
         int target = 5;
 
         System.out.println(Arrays.toString(twoSum(nums, target)));
     }
 
-    // HashMap
-    public static int[] twoSum(int[] nums, int target) {
-
-        int first = -1;
-        int sec = -1;
-
-        HashMap<Integer, Integer> numsMap = new HashMap<Integer, Integer>();
-
-        for (int i = 0; i < nums.length; i++) {
-            first = i;
-            if (numsMap.containsKey(target - nums[i])) {
-                sec = numsMap.get(target - nums[i]);
-                return new int[]{first, sec};
-            }
-            numsMap.put(nums[i], i);
-        }
-        return new int[]{0, 0};
-    }
-
-//    // double for loop - O(n^2)
-//    public int[] twoSum(int[] nums, int target) {
-//        int n = nums.length;
+    // HashMap - O(n)
+    /**
+     *
+     *  instantiated a hashMap as map
+     *  iterate through the input array using iterator i
+     *  find if the map contain the differences between the target value and the value of current index
+     *  if map contain the difference value return the current index and the differences value's index that is stored in map
+     *  if map does not contain the difference value, store the current value as key in map and store the index of the current index as value in map
+     *  continue iteration
+     */
+//    public static int[] twoSum(int[] nums, int target) {
 //
-//        for (int i = 1; i < n; i++) {
-//            for (int j = i; j < n; j++) {
+//        HashMap map = new HashMap<Integer,Integer>();
 //
-//                int sum = nums[j] + nums[j - i];
-//                if (sum == target) {
-//                    return new int[]{j - i, j};
-//                }
+//        for(int i = 0;i < nums.length;i++){
+//            if(map.containsKey(target - nums[i])){
+//                return new int[] {i,(int) map.get(target - nums[i])};
+//            } else {
+//                map.put(nums[i], i);
 //            }
 //        }
 //        return null;
 //    }
+
+    // Nested for loop - O(2n)
+    /**
+     *  iterate through the input array as i iterator
+     *      nested for loop using j as iterator (j start at i +1)
+     *
+     *          is target - value at j is value at i?
+     *              if yes, return i, j
+     *              if no, j continue to iterate
+     *      if j not find any value, iterate i
+     *          j = i + 1
+     *
+     **/
+    public static int[] twoSum(int[] nums, int target) {
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = i + 1; j < nums.length; j++) {
+                if (nums[i] == target - nums[j]) {
+                    return new int[] {i, j};
+                }
+            }
+        }
+        return null;
+    }
 }
