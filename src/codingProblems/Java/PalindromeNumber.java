@@ -2,48 +2,76 @@ package codingProblems.Java;
 
 public class PalindromeNumber {
 
-    // without parsing to String
-
     public static void main(String[] args) {
-        int x = 1221;
+        int x = 121;
 
         System.out.println(isPalindrome(x));
     }
 
-    public static boolean isPalindrome(int x) {
+    /**
+     * Modulus - O(n)
+     */
+    /*
+        instantiate an int reverse variable and set it to zero
+        check whether the input greater than zero using if statement
+            if input is less than zero, return false
+        check whether the input end with zero by using modulus of 10, input must not be zero
+            if the input have a remainder of 0, return false
+        perform the reverse steps until the input is smaller than the reverse using while statement
+            reverse the input value and store it in the reverse variable by perform modulus of 10 and add reverse * 10 to increase digit or to add zero at the end
+                (reverse value is getting larger)
+            store input value as input divide 10 to remove the value already perform reverse (input value is getting smaller)
+        check whether the input match the reverse using if statement
+            if input match, return true
+        check whether the input match reverse divide by 10 when it is a single digit
+            if match, return true
+     */
+    private static boolean isPalindrome(int x) {
 
         int reverse = 0;
-        boolean palindrome = false;
 
         if (x < 0 || (x % 10 == 0 && x != 0)) {
-            palindrome = false;
+            return false;
         } else {
             while (x > reverse) {
-                reverse = reverse * 10 + x % 10; // * 10 move the decimal backward - Ex: reverse 12 = 20 + 1
-                x = x / 10; // move decimal forward
+
+                reverse = x % 10 + reverse * 10;
+                x = x / 10;
+                System.out.println("x: " + x);
+                System.out.println("reverse: " + reverse);
             }
-            if (x == reverse || x == reverse / 10) { // reverse /10 disregard the middle digit
-                palindrome = true;
+            if (x == reverse || x == reverse / 10) {
+                return true;
             }
         }
-        return palindrome;
+        return false;
     }
 
-//    // toString solution - slow
-//    public boolean isPalindrome(int x) {
+    /**
+     * For loop - O(2n)
+     * Convert to string
+     */
+    /*
+        store input as input string using toString
+        instantiate a string builder as reverse
+        iterate through the input string in reverse using i as iterator
+        store each value at i to the string builder using append()
+        check if the value in the string input match the string in string builder
+            if match return true
+            else return false
+     */
+//    private static boolean isPalindrome(int x) {
 //
-//        boolean palindrome = false;
 //        String input = Integer.toString(x);
-//        StringBuffer reverse = new StringBuffer();
+//        StringBuilder reverse = new StringBuilder();
 //
-//        for (int i = input.length()-1; i >= 0; i--) {
-//
+//        for (int i = input.length() - 1; i >= 0; i --) {
 //            reverse.append(input.charAt(i));
 //        }
-//        if (input.equals(reverse.toString())){
-//            palindrome = true;
+//        if (input.equals(reverse.toString())) {
+//            return true;
 //        }
-//
-//        return palindrome;
+//        return false;
 //    }
 }
+
