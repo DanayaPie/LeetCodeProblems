@@ -4,45 +4,66 @@ import java.util.HashMap;
 
 public class RomanToInteger {
     public static void main(String[] args) {
-        String s = "XXX";
+        String s = "CMXLIII";
 
         System.out.println(romanToInt(s));
     }
 
-    // HashMap - slower
-    public static int romanToInt(String s) {
+    /**
+     * HashMap - O(n)
+     **/
+    /*
+        instantiate an int variable as res and set it to zero
+        instantiate hashMap as map with Character key and Integer value
+        add all Roman to hashMap where symbol is key and number is value
+        iterate through the input string using i as iterator
+        instantiate an int variable and store the current index value as valL
+        verify that the next index is not larger than input length -> prevent index out of bound
+            if not,
+                instantiate an int variable and store the next index value as valR
+                compare whether valL is greater than or equal to valR
+                    if yes, add valL to res
+                    else set res to res plus difference of valR and valL
+                        increment i iterator by 1 to skip to the next index
+            else add valL to res
+        return res
+     */
+    private static int romanToInt(String s) {
 
         int res = 0;
 
-        HashMap<Character, Integer> roman = new HashMap<>();
-        roman.put('I', 1);
-        roman.put('V', 5);
-        roman.put('X', 10);
-        roman.put('L', 50);
-        roman.put('C', 100);
-        roman.put('D', 500);
-        roman.put('M', 1000);
+        HashMap<Character, Integer> map = new HashMap<>();
+        map.put('I', 1);
+        map.put('V', 5);
+        map.put('X', 10);
+        map.put('L', 50);
+        map.put('C', 100);
+        map.put('D', 500);
+        map.put('M', 1000);
 
         for (int i = 0; i < s.length(); i++) {
-            int val1 = roman.get(s.charAt(i));
+            int valL = map.get(s.charAt(i));
+
 
             if (i + 1 < s.length()) {
-                int val2 = roman.get(s.charAt(i + 1));
+                int valR = map.get(s.charAt(i + 1));
 
-                if (val1 >= val2) {
-                    res = res + val1;
+                if (valL >= valR) {
+                    res += valL;
                 } else {
-                    res = res + val2 - val1;
+                    res += (valR - valL);
                     i++;
                 }
             } else {
-                res = res + val1;
+                res += valL;
             }
         }
         return res;
     }
 
-//    // switch case
+    /**
+     *  Switch statement - O(n)
+     **/
 //    public static int romanToInt(String s) {
 //
 //        int res = 0;
