@@ -13,8 +13,10 @@ public class TwoSum {
         System.out.println(Arrays.toString(twoSum(nums, target)));
     }
 
-    // HashMap - O(n)
     /**
+     *  HashMap - O(n)
+     */
+    /*
      *
      *  instantiated a hashMap as map
      *  iterate through the input array using iterator i
@@ -37,8 +39,10 @@ public class TwoSum {
 //        return null;
 //    }
 
-    // Nested for loop - O(2n)
     /**
+     *  Nested for loop - O(2n)
+     */
+    /*
      *  iterate through the input array as i iterator
      *      nested for loop using j as iterator (j start at i +1)
      *
