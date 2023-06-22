@@ -17,7 +17,6 @@ public class TwoSum {
      *  HashMap - O(n)
      */
     /*
-     *
      *  instantiated a hashMap as map
      *  iterate through the input array using iterator i
      *  find if the map contain the differences between the target value and the value of current index
