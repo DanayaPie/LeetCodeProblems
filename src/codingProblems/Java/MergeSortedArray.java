@@ -1,5 +1,7 @@
 package codingProblems.Java;
 
+import java.util.Arrays;
+
 public class MergeSortedArray {
 
     /*-
@@ -8,7 +10,7 @@ public class MergeSortedArray {
      */
     public static void main(String[] args) {
 
-        // merge sorted array and stored it inside nums1
+        // merge sorted array and stored it inside nums1, nums1.length = m + n
         int m = 5;
         int n = 3;
 
@@ -19,23 +21,31 @@ public class MergeSortedArray {
 
         nums1 = mergeSortedArray(nums1, m, nums2, n);
 
-        for (int i = 0; i < nums1.length; i++) {
-            System.out.println(nums1[i]);
-        }
+        System.out.println(Arrays.toString(nums1));
+
     }
 
     private static int[] mergeSortedArray(int[] nums1, int m, int[] nums2, int n) {
 
-        int pos1 = m - 1;
-        int pos2 = n - 1;
-        int posFinal = m + n - 1;
+        int i = m - 1;
+        int j = n - 1;
+        int currentPos = nums1.length - 1;
 
-        while (pos2 >= 0) {
+        while (i > 0 || j > 0) {
 
-            if (pos1 >= 0) {
-                nums1[posFinal--] = nums1[pos1] > nums2[pos2] ? nums1[pos1--] : nums2[pos2--];
-            } else {
-                nums1[posFinal--] = nums2[pos2--];
+            int nums1Val = nums1[i];
+            int nums2Val = nums2[j];
+
+            if (nums1Val >= nums2Val) {
+
+                nums1[currentPos] = nums1Val;
+                currentPos--;
+                i--;
+            } else if (nums2Val > nums1Val) {
+
+                nums1[currentPos] = nums2Val;
+                currentPos--;
+                j--;
             }
         }
 
