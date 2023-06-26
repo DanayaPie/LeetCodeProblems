@@ -8,50 +8,48 @@ public class MaximumSubarray {
         System.out.println(maxSubArray(nums));
     }
 
+    /*
+        Sliding Window
+        TC: O(n)
+     */
     public static int maxSubArray(int[] nums) {
 
-        int sum = 0;
-        int max = Integer.MIN_VALUE;
+        int maxSum = nums[1];
+        int currentSum = 0;
 
         for (int i = 0; i < nums.length; i++) {
 
-            sum += nums[i];
-            max = Math.max(sum, max); // return greatest value
+            currentSum += nums[i];
+            maxSum = Math.max(currentSum, maxSum);
 
-            if (sum < 0) {
-                sum = 0; // reset sum to 0 when sum += nums[i] = neg
+            // reset currentSum if it is less than 0
+            if (currentSum < 0) {
+                currentSum = 0;
             }
         }
-        return max;
+
+        return maxSum;
     }
 
-//     // also print out the "start and end indexes"
-//     public static int maxSubArray(int[] nums) {
+    /*
+        Brute Force
+        TC: O(n^2)
+     */
+//    public static int maxSubArray(int[] nums) {
 //
-//         int sum = 0;
-//         int max = Integer.MIN_VALUE;
+//        int maxSum = Integer.MIN_VALUE;
 //
-//         int startIndex = -1;
-//         int tempStartIndex = -1;
-//         int endIndex = -1;
+//        for (int i = 0; i < nums.length; i++) {
 //
-//         for (int i = 0; i < nums.length; i++) {
+//            int sum = 0;
 //
-//             sum += nums[i];
-//             if (sum > max) {
-//                 endIndex = i;
-//                 startIndex = tempStartIndex;
-//             }
+//            for (int j = i; j < nums.length; j++) {
 //
-//             max = Math.max(sum, max); // return greatest value
+//                sum += nums[j];
+//                maxSum = Math.max(sum, maxSum);
+//            }
+//        }
 //
-//             if (sum < 0) {
-//                 sum = 0; // reset sum to 0 when sum += nums[i] = neg
-//                 tempStartIndex = i + 1;
-//             }
-//         }
-//
-//         System.out.println("start index: " + startIndex + ", end index: " + endIndex);
-//         return max;
-//     }
+//        return maxSum;
+//    }
 }
