@@ -9,41 +9,96 @@ public class ReverseWordInString {
         System.out.println(reverseWordInString(s));
     }
 
-    private static String reverseWordInString(String s) {
+    /**
+        Two Pointers
+        TC: O(n) where n is the number of char
+     */
+    public static String reverseWordInString(String s) {
 
         StringBuilder res = new StringBuilder();
 
         int right = s.length() - 1;
-        int left = right;
+        int left;
 
         // iterate through s in reverse
-        for (int i = right; i >= 0; i --) {
+        for (int i = s.length() - 1; i >= 0; i--) {
 
-            if (s.charAt(i) != ' ') {
+            if (s.charAt(i) == ' ') { // if i is ' ' then append the word to the right of i
 
-                right = i;
+                left = i + 1;
 
-                while ( i >= 0 && s.charAt(i) != ' ') {
-                    i--;
+                for (int j = left; j <= right; j++) {
+
+                    res.append(s.charAt(j));
                 }
+
+                res.append(" ");
+                right = i - 1;
             }
         }
+
+        // append the first word
+        for (int j = 0; j <= right; j++) {
+
+            res.append(s.charAt(j));
+        }
+
         return res.toString();
     }
 
+    /**
+        Two Pointers w Split String
+        TC: O(n) where n is number of words
+            - round up from O(n + n/2)
+     */
 //    private static String reverseWordInString(String s) {
 //
-//        String[] strArray = s.split(" ");
-//        StringBuilder res = new StringBuilder();
+//        String[] sArray = s.split(" "); // O(n)
+//        StringBuilder sb = new StringBuilder();
 //
-//        for (int i = strArray.length - 1; i >= 0; i--) {
+//        int left = 0;
+//        int right = sArray.length - 1;
 //
-//            if (strArray[i] != "") {
-//                res.append(strArray[i]);
-//                res.append(" ");
-//            }
+//        while (left < right) {
+//
+//            String temp = sArray[left];
+//            sArray[left] = sArray[right];
+//            sArray[right] = temp;
+//
+//            sb.append(sArray[left]);
+//            sb.append(" ");
+//
+//            left++;
+//            right--;
 //        }
 //
-//        return res.toString().trim();
+//        while (left < sArray.length) {
+//
+//            sb.append(sArray[left]);
+//            sb.append(" ");
+//
+//            left++;
+//        }
+//
+//        return sb.toString();
+//    }
+
+    /**
+        Split String
+        TC: O(n) where n is number of words
+            - round up from O(n + n/2)
+     */
+//    private static String reverseWordInString(String s) {
+//
+//        String[] sArray = s.split(" "); // O(n)
+//        StringBuilder sb = new StringBuilder();
+//
+//        for (int i = sArray.length - 1; i >= 0; i--) {
+//
+//            sb.append(sArray[i]);
+//            sb.append(' ');
+//        }
+//
+//        return sb.toString();
 //    }
 }

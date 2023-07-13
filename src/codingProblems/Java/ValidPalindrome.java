@@ -1,36 +1,41 @@
 package codingProblems.Java;
 
+import javax.xml.stream.events.Characters;
+import java.util.Locale;
+
 public class ValidPalindrome {
 
-    /*-
-        Logics:
-            - 2 pointers method
-            - use isLetterOrDigit()
-            - use toLowerCase()
-     */
     public static void main(String args[]) {
         String s = "A man, a plan, a canal: Panama";
 
         System.out.println(isPalindrome(s));
     }
 
+    /**
+        Two Pointers
+        TC: O(n)
+     */
     private static boolean isPalindrome(String s) {
+
 
         int left = 0;
         int right = s.length() - 1;
 
         while (left < right) {
-            char lc = s.charAt(left);
-            char rc = s.charAt(right);
 
-            if (!Character.isLetterOrDigit(lc)) {
+            char leftC = s.charAt(left);
+            char rightC = s.charAt(right);
+
+            if (!Character.isLetterOrDigit(leftC)) {
+
                 left++;
-            } else if (!Character.isLetterOrDigit(rc)) {
+            } else if (!Character.isLetterOrDigit(rightC)) {
+
                 right--;
+            } else if (Character.toLowerCase(leftC) != Character.toLowerCase(rightC)) {
+
+                return false;
             } else {
-                if (Character.toLowerCase(lc) != Character.toLowerCase(rc)) {
-                    return false;
-                }
 
                 left++;
                 right--;

@@ -8,20 +8,22 @@ public class ThreeSum {
 
     public static void main(String[] args) {
 
-        int[] arr = {-1, 0, 1, -2, 2};
+        int[] arr = {-1, 0, 1, 2, -1, -4};
 
         System.out.println(threeSum(arr));
     }
 
-    /*
-        2 pointers - must sort the array
+    /**
+        Two Pointers - must sort the array
         TC: O(n^2)
         SC: O(1) or O(n)
      */
     public static List<List<Integer>> threeSum(int[] arr) {
 
         List<List<Integer>> resList = new ArrayList<>();
-        Arrays.sort(arr);
+        Arrays.sort(arr); // O(n log n)
+
+        int right = arr.length - 1;
 
         for (int i = 0; i < arr.length; i++) {
 
@@ -30,9 +32,9 @@ public class ThreeSum {
             } else {
 
                 int left = i + 1;
-                int right = arr.length - 1;
 
                 while (left < right) {
+
                     int threeSum = arr[i] + arr[left] + arr[right];
 
                     if (threeSum < 0) {
@@ -43,18 +45,16 @@ public class ThreeSum {
                         right--;
                     } else {
 
-                        ArrayList<Integer> res = new ArrayList<>();
-                        res.add(arr[i]);
-                        res.add(arr[left]);
-                        res.add(arr[right]);
+                        ArrayList<Integer> threeSumList = new ArrayList<>();
+                        threeSumList.add(arr[i]);
+                        threeSumList.add(arr[left]);
+                        threeSumList.add(arr[right]);
 
-                        resList.add(res);
-
+                        resList.add(threeSumList);
                         left++;
-                        while (arr[left] == arr[left - 1] && left < right) {
-                            left++;
-                        }
+                        right--;
                     }
+
                 }
             }
         }
