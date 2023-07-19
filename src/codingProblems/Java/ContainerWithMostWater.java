@@ -9,36 +9,33 @@ public class ContainerWithMostWater {
         System.out.println(maxArea(height));
     }
 
-    /*
-        Two Pointers
-        TC: O(n)
+    /**
+     * Sliding Window
+     * TC: O(n)
      */
     private static int maxArea(int[] height) {
 
-        int maxArea = 0;
+        int maxArea = Integer.MIN_VALUE;
+        int lEnd = 0;
 
-        int left = 0;
-        int right = height.length - 1;
+        for (int rEnd = 1; rEnd < height.length; rEnd++) {
 
-        while (left < right) {
+            int minHeight = Math.min(height[lEnd], height[rEnd]);
+            int currentArea = (rEnd - lEnd) * minHeight;
+            maxArea = Math.max(maxArea, currentArea);
 
-            int minHeight = Math.min(height[left], height[right]);
-            int currentArea = (right - left) * minHeight;
-            maxArea = Math.max(currentArea, maxArea);
+            if (height[lEnd] < height[lEnd + 1]) {
 
-            if (height[left] > height[right]) {
-                right--;
-            } else {
-                left++;
+                lEnd++;
             }
         }
 
         return maxArea;
     }
 
-    /*
-        Brute force
-        TC: O(n^2)
+    /**
+     * Brute Force
+     * TC: O(n^2)
      */
 //    private static int maxArea(int[] height) {
 //

@@ -6,31 +6,72 @@ public class LongestSubstringWithoutRepeatingChar {
 
     public static void main(String[] args) {
 
-        String s = "pwwkew";
+        String s = "dvdf";
         System.out.println(lengthOfLongestSubstring(s));
     }
 
+    /**
+     * Sliding Window - HashSet
+     * TC: O(n)
+     * SC: O(min(n,m)), m is the distinct char
+     */
     public static int lengthOfLongestSubstring(String s) {
 
-        HashSet<Character> hsChar = new HashSet<>();
-        int length = 0;
-        int toDelete = 0;
+        int maxLength = 0;
+        int lEnd = 0;
+        int rEnd = 0;
 
-        for (int i = 0; i < s.length(); i++) {
+        HashSet<Character> charSet = new HashSet<>();
 
-            if (!hsChar.contains(s.charAt(i))) {
-                hsChar.add(s.charAt(i));
+        while (rEnd < s.length()) {
 
-                length = Math.max(hsChar.size(), length);
+            if (!charSet.contains(s.charAt(rEnd))) {
 
+                charSet.add(s.charAt(rEnd));
+                maxLength = Math.max(maxLength, charSet.size());
+                rEnd++;
             } else {
-                while (toDelete <= i && hsChar.contains(s.charAt(i))) {
-                    hsChar.remove(s.charAt(toDelete));
-                    ++toDelete;
-                }
-                hsChar.add(s.charAt(i));
+
+                charSet.remove(s.charAt(lEnd));
+                lEnd++;
             }
         }
-        return length;
+
+        return maxLength;
     }
+
+    /**
+     * Sliding Window - HashSet
+     * TC: O(n) - worst case O(n^2) due to iterate toDelete
+     * SC: O(min(n,m)), m is the distinct char
+     */
+//    public static int lengthOfLongestSubstring(String s) {     // dvdf
+//
+//        int maxLength = 0;
+//        int toDelete = 0;
+//        HashSet<Character> charSet = new HashSet<>();
+//
+//        for (int i = 0; i < s.length(); i++) {
+//
+//            char currentChar = s.charAt(i);
+//
+//            if (!charSet.contains(currentChar)) {
+//
+//                charSet.add(currentChar);
+//                maxLength = Math.max(maxLength, charSet.size());
+//            } else {
+//
+//                while (toDelete < i && charSet.contains(currentChar)) {
+//
+//                    charSet.remove(s.charAt(toDelete));
+//                    toDelete++;
+//                }
+//
+//                charSet.add(currentChar);
+//            }
+//
+//        }
+//
+//        return maxLength;
+//    }
 }

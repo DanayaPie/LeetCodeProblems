@@ -8,47 +8,53 @@ public class SlidingWindowMax {
 
     public static void main(String[] args) {
 
-        int[] nums = {1, 3, -1, -3, 5, 3, 6, 7};
-        int k = 3;
+        int[] nums = {7,2,4};
+        int k = 2;
 
         System.out.println(Arrays.toString(maxSlidingWindow(nums, k)));
     }
 
-    /*
-        Monotonic queue
-        TC: O(n)
+    /**
+     * Sliding Window - Monotonic queue
+     * TC: O(n), adding and removing in que is O(1)
+     * SC: O(k), but O(n - k + 1) if counting the int[] res
      */
     public static int[] maxSlidingWindow(int[] nums, int k) {
 
         int[] res = new int[nums.length - k + 1];
         Deque<Integer> maxIndexQ = new ArrayDeque<>();
+        int lEnd = 0;
 
-        for (int i = 0; i < nums.length; i++) {
+        for (int rEnd = 0; rEnd < nums.length; rEnd++) {
 
-            // remove from last if last element is smaller than current element
-            while (!maxIndexQ.isEmpty() && nums[i] > nums[maxIndexQ.peekLast()]) {
+            // if queue is not empty, removes all elements from the LEFT that are less than current element
+            while (!maxIndexQ.isEmpty() && nums[rEnd] > nums[maxIndexQ.peekLast()]) {
+
                 maxIndexQ.pollLast();
             }
 
-            // add current element to queue
-            maxIndexQ.add(i);
+            maxIndexQ.add(rEnd);
 
-            // if current element is at the end of the window
-            if (i >= k - 1) {
+            // if rEnd is equal or larger than right bracket
+            if (rEnd >= k - 1) {
 
-                if (!maxIndexQ.isEmpty() && maxIndexQ.peekFirst() < i - k + 1) {
+                if (!maxIndexQ.isEmpty() && maxIndexQ.peekFirst() < lEnd) {
+
                     maxIndexQ.pollFirst();
                 }
-                res[i - k + 1] = nums[maxIndexQ.peekFirst()];
+
+                res[lEnd] = nums[maxIndexQ.peekFirst()];
+                lEnd++;
             }
         }
 
         return res;
     }
 
-    /*
-        Brute force -> time out on LeetCode
-        TC: O(nk)
+
+    /**
+     * Brute force -> time out on LeetCode
+     * TC: O(nk)
      */
 //    public static int[] maxSlidingWindow(int[] nums, int k) {
 //
@@ -56,17 +62,17 @@ public class SlidingWindowMax {
 //
 //        for (int i = 0; i < nums.length; i++) {
 //
-//            int currentMax = nums[i];
+//            int max = nums[i];
 //            int j = i + 1;
 //
-//            while (j < i + k && j < nums.length) {
+//            while (j < i + k - 1 && j < nums.length) {
 //
-//                currentMax = Math.max(currentMax, nums[j]);
+//                max = Math.max(max, nums[j]);
 //                j++;
 //            }
 //
 //            if (i < res.length) {
-//                res[i] = currentMax;
+//                res[i] = max;
 //            }
 //        }
 //
