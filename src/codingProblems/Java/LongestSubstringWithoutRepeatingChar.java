@@ -6,7 +6,7 @@ public class LongestSubstringWithoutRepeatingChar {
 
     public static void main(String[] args) {
 
-        String s = "dvdf";
+        String s = "pwwkew";
         System.out.println(lengthOfLongestSubstring(s));
     }
 
@@ -20,20 +20,19 @@ public class LongestSubstringWithoutRepeatingChar {
         int maxLength = 0;
         int lEnd = 0;
         int rEnd = 0;
-
         HashSet<Character> charSet = new HashSet<>();
 
         while (rEnd < s.length()) {
 
-            if (!charSet.contains(s.charAt(rEnd))) {
-
-                charSet.add(s.charAt(rEnd));
-                maxLength = Math.max(maxLength, charSet.size());
-                rEnd++;
-            } else {
+            if (charSet.contains(s.charAt(rEnd))) {
 
                 charSet.remove(s.charAt(lEnd));
                 lEnd++;
+            } else {
+
+                charSet.add(s.charAt(rEnd));
+                maxLength = Math.max(maxLength, rEnd - lEnd + 1);
+                rEnd++;
             }
         }
 
@@ -45,7 +44,7 @@ public class LongestSubstringWithoutRepeatingChar {
      * TC: O(n) - worst case O(n^2) due to iterate toDelete
      * SC: O(min(n,m)), m is the distinct char
      */
-//    public static int lengthOfLongestSubstring(String s) {     // dvdf
+//    public static int lengthOfLongestSubstring(String s) {
 //
 //        int maxLength = 0;
 //        int toDelete = 0;
