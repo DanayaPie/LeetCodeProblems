@@ -6,25 +6,9 @@ public class ValidParentheses {
 
     public static void main(String[] args) {
 
-        String s = "[{]}]";
+        String s = "[{}]";
 
         System.out.println(isValid(s));
-    }
-
-    // fast Stack
-    public static boolean isValid(String s) {
-        Stack<Character> stack = new Stack<Character>();
-        for (char c : s.toCharArray()) {
-            if (c == '(')
-                stack.push(')');
-            else if (c == '{')
-                stack.push('}');
-            else if (c == '[')
-                stack.push(']');
-            else if (stack.isEmpty() || stack.pop() != c)
-                return false;
-        }
-        return stack.isEmpty();
     }
 
 //     // fast Switch
@@ -43,45 +27,72 @@ public class ValidParentheses {
 //       }
 //     }
 
-//     // works but slow! - mine
-//     public static boolean isValid(String s) {
+    /**
+     * Stack
+     * TC: O(n)
+     * SC: O(n), from O(n/2) stack
+     */
+    public static boolean isValid(String s) {
 
-//         Stack<Character> stack = new Stack<>();
+        if (s.length() % 2 != 0) {
+            return false;
+        }
 
-//         HashMap<Character, Character> hm = new HashMap<>();
-//         hm.put(')', '(');
-//         hm.put(']', '[');
-//         hm.put('}', '{');
+        Stack<Character> charStack = new Stack<>();
 
-//         if (s.length() % 2 != 0) {
-//             return false;
-//         }
+        for (char c : s.toCharArray()) {
 
-//         for (int i = 0; i < s.length(); i++) {
+            if (c == '[') {
+                charStack.push(']');
+            } else if (c == '{') {
+                charStack.push('}');
+            } else if (c == '(') {
+                charStack.push(')');
+            } else if (charStack.isEmpty() || charStack.pop() != c) {
+                return false;
+            }
+        }
 
-//             if (s.charAt(i) == '(' || s.charAt(i) == '[' || s.charAt(i) == '{') {
-//                 stack.add(s.charAt(i));
+        return true;
+    }
 
-//             } else if (!stack.isEmpty()) {
-//                 char top = stack.peek();
-
-//                 System.out.println(top + " == " + hm.get(s.charAt(i)));
-
-//                 if (top == hm.get(s.charAt(i))) {
-//                     stack.pop();
-
-//                 } else {
-//                     return false;
-//                 }
-//             } else {
-//                 return false;
-//             }
-//         }
-
-//         if (stack.isEmpty()){
-//             return true;
-//         }
-
-//         return false;
-//     }
+    /**
+     * Stack with HashMap
+     * TC: O(n)
+     * SC: O(n) from stack usage, neglect constant hashmap space
+     */
+//    public static boolean isValid(String s) {
+//
+//        if (s.length() % 2 != 0) {
+//            return false;
+//        }
+//
+//        Stack<Character> charStack = new Stack<>();
+//
+//        HashMap<Character, Character> parenthesesMap = new HashMap<>();
+//        parenthesesMap.put(']', '[');
+//        parenthesesMap.put('}', '{');
+//        parenthesesMap.put(')', '(');
+//
+//        for (char c : s.toCharArray()) {
+//
+//            if (!parenthesesMap.containsKey(c)) {
+//
+//                charStack.push(c);
+//            } else {
+//                if (!charStack.isEmpty()) {
+//
+//                    if (charStack.peek() == parenthesesMap.get(c)) {
+//                        charStack.pop();
+//                    } else {
+//                        return false;
+//                    }
+//                } else {
+//                    return false;
+//                }
+//            }
+//        }
+//
+//        return true;
+//    }
 }
