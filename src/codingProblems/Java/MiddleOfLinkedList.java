@@ -30,7 +30,7 @@ public class MiddleOfLinkedList {
         return slow;
     }
 
-    public static class ListNode {
+    private static class ListNode {
 
         int data;
         ListNode next;
