@@ -8,7 +8,7 @@ public class SlidingWindowMax {
 
     public static void main(String[] args) {
 
-        int[] nums = {7,2,4};
+        int[] nums = {7, 2, 4};
         int k = 2;
 
         System.out.println(Arrays.toString(maxSlidingWindow(nums, k)));
@@ -27,19 +27,17 @@ public class SlidingWindowMax {
 
         for (int rEnd = 0; rEnd < nums.length; rEnd++) {
 
-            // if queue is not empty, removes all elements from the LEFT that are less than current element
+            // remove all values that is less than nums[rEnd] from LAST
             while (!maxIndexQ.isEmpty() && nums[rEnd] > nums[maxIndexQ.peekLast()]) {
-
                 maxIndexQ.pollLast();
             }
 
             maxIndexQ.add(rEnd);
 
-            // if rEnd is equal or larger than right bracket
             if (rEnd >= k - 1) {
 
+                // remove first value if first value is out of left window range
                 if (!maxIndexQ.isEmpty() && maxIndexQ.peekFirst() < lEnd) {
-
                     maxIndexQ.pollFirst();
                 }
 
