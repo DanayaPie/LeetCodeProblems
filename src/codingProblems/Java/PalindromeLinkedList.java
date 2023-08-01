@@ -4,11 +4,11 @@ public class PalindromeLinkedList {
 
     public static void main(String[] args) {
 
-        ListNode head = new ListNode(0);
-        head.next = new ListNode(3);
-        head.next.next = new ListNode(9);
-        head.next.next.next = new ListNode(4);
-        head.next.next.next.next = new ListNode(0);
+        codingProblems.Java.PalindromeLinkedList.ListNode head = new codingProblems.Java.PalindromeLinkedList.ListNode(0);
+        head.next = new codingProblems.Java.PalindromeLinkedList.ListNode(3);
+        head.next.next = new codingProblems.Java.PalindromeLinkedList.ListNode(9);
+        head.next.next.next = new codingProblems.Java.PalindromeLinkedList.ListNode(4);
+        head.next.next.next.next = new codingProblems.Java.PalindromeLinkedList.ListNode(0);
 
         System.out.println(isPalindrome(head));
     }
@@ -17,10 +17,10 @@ public class PalindromeLinkedList {
      * Fast and Slow Pointers
      * TC: O(n)
      */
-    public static boolean isPalindrome(ListNode head) {
+    public static boolean isPalindrome(codingProblems.Java.PalindromeLinkedList.ListNode head) {
 
-        ListNode slow = head;
-        ListNode fast = head;
+        codingProblems.Java.PalindromeLinkedList.ListNode slow = head;
+        codingProblems.Java.PalindromeLinkedList.ListNode fast = head;
 
         while (fast != null && fast.next != null) {
 
@@ -29,8 +29,8 @@ public class PalindromeLinkedList {
         }
 
         // reverse second half
-        ListNode rightEnd = reversLinkedList(slow);
-        ListNode leftEnd = head;
+        codingProblems.Java.PalindromeLinkedList.ListNode rightEnd = reversLinkedList(slow);
+        codingProblems.Java.PalindromeLinkedList.ListNode leftEnd = head;
 
         while (rightEnd != null) {
 
@@ -48,12 +48,12 @@ public class PalindromeLinkedList {
         return true;
     }
 
-    private static ListNode reversLinkedList(ListNode head) {
+    private static codingProblems.Java.PalindromeLinkedList.ListNode reversLinkedList(codingProblems.Java.PalindromeLinkedList.ListNode head) {
 
-        ListNode prev = null;
+        codingProblems.Java.PalindromeLinkedList.ListNode prev = null;
 
         while (head != null) {
-            ListNode next = head.next;
+            codingProblems.Java.PalindromeLinkedList.ListNode next = head.next;
             head.next = prev;
             prev = head;
             head = next;
@@ -61,15 +61,17 @@ public class PalindromeLinkedList {
 
         return prev;
     }
-}
 
-class ListNode {
+    private static class ListNode {
 
-    int data;
-    ListNode next;
+        int data;
+        codingProblems.Java.PalindromeLinkedList.ListNode next;
 
-    public ListNode(int data) {
-        this.data = data;
-        this.next = null;
+        public ListNode(int data) {
+            this.data = data;
+            this.next = null;
+        }
     }
 }
+
+
