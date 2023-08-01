@@ -10,58 +10,78 @@ public class ClimbingStairs {
  */
     public static void main(String[] args) {
 
-        int n = 8;
+        int n = 5;
 
         System.out.println(climbStairs(n));
     }
 
-    // DP Optimized
+
+    /**
+     * DP - bottom up, working from bottom of tree (from n)
+     * TC: O(n)
+     * SC: O(1)
+     */
+//    public static int climbStairs(int n) {
+//
+//        if (n == 1 || n == 2) {
+//            return n;
+//        }
+//
+//        int prev1 = 1;
+//        int prev2 = 1;
+//
+//        for (int i = 0; i < n - 1; i++) {
+//
+//            int temp = prev1;
+//            prev1 = prev1 + prev2;
+//            prev2 = temp;
+//        }
+//
+//        return prev1;
+//    }
+
+    /**
+     * Memoization - Recursion
+     * TC: O(n), calculate and store result for each 1 to n once
+     * SC: O(n), memoization table
+     */
     public static int climbStairs(int n) {
 
-        int prev1 = 1;
-        int prev2 = 2;
+        // initialize memoization table for each possible steps, n, and number of ways, memo[n]
+        int[] memo = new int[n + 1];
+        return climbStairsMemo(n, memo);
+    }
 
-        if (n <= 3) {
+    private static int climbStairsMemo(int n, int[] memo) {
+
+        if (n == 1 || n == 2) {
             return n;
         }
 
-        for (int i = 3; i <= n; i++) {
-            int sum = prev1 + prev2;
-
-            prev1 = prev2;
-            prev2 = sum;
+        if (memo[n] != 0) {
+            return memo[n];
         }
 
-        return prev2;
+        // recursively call climbStairsMemo until n == 1 or n == 2 or memo[n] exist in memo table
+        memo[n] = climbStairsMemo(n - 1, memo) + climbStairsMemo(n - 2, memo);
+        return memo[n];
     }
 
-//    // DP
-//    public static int climbStairs(int n) {
-//
-//        if (n <= 3) {
-//            return n;
-//        }
-//
-//        int[] res = new int[n + 1];
-//        res[1] = 1;
-//        res[2] = 2;
-//
-//        for (int i = 3; i <= n; i++) {
-//            res[i] = res[n - 1] + res[n - 2];
-//        }
-//
-//        return res[n];
-//    }
 
-//    // Recursive
+    /**
+     * Brute Force - Recursion
+     * TC: O(2^n), each recursion call, the function calls itself twice forming binary tree
+     * SC: O(n), determine by the depth of recursion stack
+     */
 //    public static int climbStairs(int n) {
 //
-//        int res = 0;
-//        if (n >= 1 && n <= 2) {
+//        if (n == 1 || n == 2) {
 //            return n;
 //        }
 //
-//        res = climbStairs((n-1)) + climbStairs(n-2);
-//        return res;
+//        int ways = 0;
+//        ways = climbStairs(n - 1) + climbStairs(n - 2); // climbing 1 + 2 steps at a time
+//
+//        return ways;
 //    }
 }

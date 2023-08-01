@@ -26,14 +26,14 @@ public class FlattenNestedListIterator {
      */
     public static class NestedIterator implements Iterator<Integer> {
 
-        // stack to keep track of nested list that are yet to visited
+        // instantiate stack to store int or nestedInt that has not yet seen
         private Stack<NestedInteger> toBeSeenStack;
 
         public NestedIterator(List<NestedInteger> nestedList) {
 
-            toBeSeenStack = new Stack<>(); // initialize the stack
+            toBeSeenStack = new Stack<>(); // initialize toBeSeenStack
 
-            for (int i = nestedList.size() - 1; i >= 0; i--) {
+            for (int i = nestedList.size() - 1; i >= 0; i--) { // iterate in reverse bc stack is FILO
                 toBeSeenStack.push(nestedList.get(i));
             }
         }
@@ -54,16 +54,14 @@ public class FlattenNestedListIterator {
             while (!toBeSeenStack.isEmpty()) {
 
                 NestedInteger topStack = toBeSeenStack.peek();
-
                 if (topStack.isInteger()) {
                     return true;
                 }
 
                 toBeSeenStack.pop();
 
-                // get the nestedList from the top of stack
                 List<NestedInteger> nestedList = topStack.getList();
-                for (int i = nestedList.size() - 1; i >= 0; i--) {
+                for (int i = nestedList.size() - 1; i >= 0; i--) { // iterate in reverse bc stack is FILO
                     toBeSeenStack.push(nestedList.get(i));
                 }
             }
@@ -73,7 +71,54 @@ public class FlattenNestedListIterator {
     }
 
     /**
+     * Recursion
+     * TC: O(n), can result in stack overflow in deep nested lists
+     * SC: O(n)
+     */
+//    public static class NestedIterator implements Iterator<Integer> {
+//
+//        private List<Integer> flattenedList;
+//        private int currentIndex;
+//
+//        public NestedIterator(List<NestedInteger> nestedList) {
+//
+//            flattenedList = flatten(nestedList);
+//            currentIndex = 0;
+//        }
+//
+//        private List<Integer> flatten(List<NestedInteger> nestedList) {
+//
+//            List<Integer> res = new ArrayList<>();
+//
+//            for (NestedInteger nestedInt : nestedList) {
+//
+//                if (nestedInt.isInteger()) {
+//                    res.add(nestedInt.getInteger());
+//                } else {
+//                    res.addAll(flatten(nestedInt.getList()));
+//                }
+//            }
+//
+//            return res;
+//        }
+//
+//        @Override
+//        public Integer next() {
+//            return flattenedList.get(currentIndex++);
+//        }
+//
+//        @Override
+//        public boolean hasNext() {
+//            return currentIndex < flattenedList.size();
+//        }
+//    }
+
+    /*
      * NestedInteger Object
+     *
+     * Your NestedIterator object will be instantiated and called as such:
+     * NestedIterator i = new NestedIterator(nestedList);
+     * while (i.hasNext()) v[f()] = i.next();
      */
     public static class NestedInteger {
         // Fields
