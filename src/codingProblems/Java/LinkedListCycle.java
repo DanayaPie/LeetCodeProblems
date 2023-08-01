@@ -39,7 +39,7 @@ public class LinkedListCycle {
         return false;
     }
 
-    public static class ListNode {
+    private static class ListNode {
 
         int data;
         ListNode next;
