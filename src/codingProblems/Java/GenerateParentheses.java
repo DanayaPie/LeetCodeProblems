@@ -13,7 +13,7 @@ public class GenerateParentheses {
     }
 
     /**
-     * Backtracking Recursion - StringBuilder
+     * Backtracking - StringBuilder
      * TC: O(2^(2n) * n), 2^(2n) is number of possible combination, n for time to copy parentheses combination to res
      * SC: O(2n), for StringBuilder
      */
