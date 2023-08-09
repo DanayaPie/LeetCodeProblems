@@ -1,5 +1,10 @@
 package codingProblems.Java;
 
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Set;
+
 public class LinkedListCycle {
 
     public static void main(String[] args) {
@@ -38,6 +43,38 @@ public class LinkedListCycle {
 
         return false;
     }
+
+    /**
+     * BFS with HashSet
+     * TC: O(n)
+     * SC: O(n)
+     */
+//    public static boolean hasCycle(ListNode head) {
+//
+//        if (head == null || head.next == null) {
+//            return false;
+//        }
+//
+//        Queue<ListNode> toBeSeenQueue = new LinkedList<>();
+//        Set<ListNode> visited = new HashSet<>();
+//        toBeSeenQueue.add(head);
+//
+//        while (!toBeSeenQueue.isEmpty()) {
+//            ListNode current = toBeSeenQueue.poll();
+//
+//            if (visited.contains(current)) {
+//                return true;
+//            }
+//            visited.add(current);
+//
+//            if (current.next != null) {
+//                toBeSeenQueue.add(current.next);
+//            }
+//
+//        }
+//
+//        return false;
+//    }
 
     private static class ListNode {
 
